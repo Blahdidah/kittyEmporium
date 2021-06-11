@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Melissa's Kitty Emporium</title>
+<link rel="stylesheet" href="kitty.css">
+<script>
+</script>
+</head>
+<body>
+<div id="top">
+<h1>Welcome to the Kitty Emporium!</h1>
+<p>Welcome to Melissa's Kitty Emporium. We specialize in toys and treats that are healthy for 
+munchkins, napoleons, and minuets. Take a minute to look around! Enjoy your stay!</p>
+</div>
+
+<div class="form">
+<form id="store">
+
+<div class="kittyItems">
+<img id="shelves" src="./kittyshelves.jpg"><br/>
+<img id="laptop" src="./kittylaptop.jpg"><br/>
+<img id="tower" src="./catstacktower.jpg"><br/>
+<img id="condo" src="./catcondotower.jpg"><br/>
+</div>
+
+<div class="store-grid">
+<div id="undershelves">
+<label for="kitty_shelves">Kitty Shelves, $30/each </label>
+<br/>Qty: <select name="item_0" id ="kitty_shelves">  
+<option value="0">0</option>
+<option value="30">1</option>
+<option value="60">2</option>
+<option value="90">3</option>
+</select>
+<script>
+function cart(){
+let shelfqty = document.getElementById("store").elements[0].value;
+let laptopqty = document.getElementById("store").elements[1].value;
+let towerqty = document.getElementById("store").elements[2].value;
+let condoqty = document.getElementById("store").elements[3].value;
+
+let shelfamt = parseFloat(shelfqty);
+let laptopamt = parseFloat(laptopqty);
+let toweramt = parseFloat(towerqty);
+let condoamt = parseFloat(condoqty);
+
+let total = shelfamt+laptopamt+toweramt+condoamt;
+
+document.getElementById('cart').innerHTML ="$"+total;
+}
+
+document.getElementById("kitty_shelves").addEventListener("input", cart);
+</script>
+</div>
+<div id="underlaptop">
+<label for="kitty_laptop">Kitty Laptop, $20</label>
+<br/>Qty:<select name="item_1" id="kitty_laptop">
+<option value="0">0</option>
+<option value="20">1</option>
+<option value="40">2</option>
+<option value="60">3</option>
+</select>
+<script>
+document.getElementById("kitty_laptop").addEventListener("input", cart);
+</script>
+</div>
+<div id="undertower">
+<label for="kitty_tower">Kitty Tower, $15</label>
+<br/>Qty:<select name="item_2" id="kitty_tower">
+<option value="0">0</option>
+<option value="15">1</option>
+<option value="30">2</option>
+<option value="45">3</option>
+<script>
+
+document.getElementById("kitty_tower").addEventListener("input", cart);
+</script>
+</select>
+</div>
+
+<div id="undercondo">
+<label for="kitty_condo">Kitty condo, $100</label>
+<br/>Qty:<select name="item_3" id="kitty_condo">
+<option value="0">0</option>
+<option value="100">1</option>
+<option value="200">2</option>
+<option value="300">3</option>
+<script>
+document.getElementById("kitty_condo").addEventListener("input", cart);
+</script>
+</select>
+</div>
+
+<div class="break"><br/><br/><br/></div>
+<div class="shippinginfo">
+<label for = "first_name">First Name:</label>
+<input type="text" id="fname" name="first_name" class="required"><br/>
+
+<label for = "last_name">Last Name:</label>
+<input type="text" id="lname" name="last_name" class="required"></br>
+
+<label for ="address"> Address:</label><br/>
+<textarea cols="50" rows="4" name="address" placeholder="Address, City, State, Zip code" class="required">
+</textarea><br/>
+<!--this needs to validate-->
+<label for "phone">Phone:</label>
+<input type="text" id="phone" name="phone" placeholder="XXX-XXX-XXXX" class="required"><h6 id="phoneError"></h6></br>
+<script>
+function checkPhone(){
+    let phonevalue = document.getElementById("phone").value;
+    let pattern= /\d{3}-\d{3}-\d{4}/;
+    if (pattern.test(phonevalue)){
+        document.getElementById("phoneError").innerHTML = " "
+    }
+    else{
+        document.getElementById("phoneError").innerHTML = "Please enter a number in the XXX-XXX-XXXX format"
+        document.getElementById("phone").focus();
+    }
+}
+document.getElementById("phone").addEventListener("input", checkPhone);
+</script>
+</div>
+<div class="shippinginfo2">
+<label for="CC_type">Credit Card Type:</label><br/>
+
+<input type="radio" id="mastercard" name="card">
+<label for="mastercard">Mastercard</label>
+
+<input type="radio" id="Visa" name="card">
+<label for="Visa">Visa</label>
+<input type="radio" id="AmEx" name="card">
+<label for="AmEx">American Express</label></br>
+
+<label for="credit_card">Credit Card Number:</label>
+<input type="text" id="credit_card" name="credit_card" placeholder="XXXX XXXX XXXX XXXX"><h6 id="cardError"></h6></br>
+<script>
+function checkCard(){
+    let cardValue = document.getElementById("credit_card").value;
+    let cardPattern = /\d{4} \d{4} \d{4} \d{4}/;
+if(cardPattern.test(cardValue)){
+    document.getElementById("cardError").innerHTML = " "
+    }
+    else{
+        document.getElementById("cardError").innerHTML = "Please use the XXXX XXXX XXXX XXXX format, spaces required."
+        document.getElementById("credit_card").focus();
+    }
+}
+document.getElementById("credit_card").addEventListener("input", checkCard);
+</script>
+
+<label for="exp_date">Expiration Date:</label>
+<input type="text" id="exp_date" name="exp_date" size="5" placeholder="mm/yyyy"><h6 id="expError"></h6></br>
+<script>
+function checkExp(){
+    let expValue = document.getElementById("exp_date").value;
+    let expPattern = /\d{2}\/\d{4}/;
+    if(expPattern.test(expValue)){
+        document.getElementById("expError").innerHTML= " "
+    }
+    else{
+        document.getElementById("expError").innerHTML = "Please follow the mm/yyyy format. Slash included."
+        document.getElementById("exp_date").focus();
+    }
+}
+document.getElementById("exp_date").addEventListener("input", checkExp);
+</script>
+<!--this requires validation-->
+</div>
+<div class="submit">
+<h6 id="validateError"></h6>
+<button type="button" id="submit">Submit</button>
+<button type="reset">Reset</button>
+
+</div>
+<div class="break"><br/><br/><br/></div>
+<div id="cartCont">
+Total: 
+<div id="cart">
+<!--this is where a running total would go-->
+<script>
+
+function validate(){
+    let required = document.getElementsByClassName('required');
+    let len = required.length;
+    for(var i=0; i<len; i++){
+        if (required[i].value === ""){
+            document.getElementById("validateError").innerHTML = "Please fill in required fields."
+        }
+        else{
+            document.getElementById("validateError").innerHTML = " "
+        }
+    };
+}
+document.getElementById("submit").addEventListener("click", validate)
+</script>
+</div>
+</div>
+</div>
+</form>
+</div>
+
+
+</body>
+</html>
